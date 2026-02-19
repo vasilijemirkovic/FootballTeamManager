@@ -128,7 +128,8 @@ int main() {
   std::cout << "After transfer:\n" << psg << '\n' << realMadrid << '\n';
 
 
-  
+  cout << psg.startingLineup() << endl;
+
   cout << "\nBonus 10 points\n";
   try {
     cout << barcelona.lineup() << '\n';
