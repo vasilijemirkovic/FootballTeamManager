@@ -1,6 +1,8 @@
 #include "player.h"
 #include <stdexcept>
 
+using namespace std;
+
 Player::Player(const string& name, const int& transferFee, const Position& position)
     : name{ name }, transferFee{ transferFee }, position{ position }
 {
@@ -60,3 +62,8 @@ ostream& operator<<(ostream& os, const Player& player)
               << positionNames.at(static_cast<int>(player.position))
               << ", Rating: " << player.getRating() << "]";
 }
+
+string positionToString(Position p){
+    return positionNames.at(static_cast<int>(p));
+}
+
