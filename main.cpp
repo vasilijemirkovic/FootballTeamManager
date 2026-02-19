@@ -22,6 +22,8 @@ int main() {
   Player messi{"Messi", 180, Position::Striker};
   Player suarez{"Suarez", 70, Position::Striker};
   Player elhaddadi{"El Haddadi", 12, Position::Striker};
+  Player ramos{"Ramos", 60, Position::Defense};
+  Player modric{"Modric", 50, Position::Midfield};
 
   cout << "PLAYERS\n";
   cout << messi << '\n';
@@ -112,6 +114,18 @@ int main() {
   barcelona.signPlayers({});
   cout << barcelona << '\n';
 
+  Team psg{"PSG", {coutinho, cillessen, suarez}};
+  Team realMadrid{"Real Madrid", {messi, ramos, modric}};
+
+  std::cout << "Before transfer:\n" << psg << '\n' << realMadrid << '\n';
+
+  // Transfer Messi from Real Madrid to PSG
+  if (psg.buyPlayer(messi, realMadrid))
+      std::cout << "Transfer successful!\n";
+  else
+      std::cout << "Transfer failed!\n";
+
+  std::cout << "After transfer:\n" << psg << '\n' << realMadrid << '\n';
 
 
   
