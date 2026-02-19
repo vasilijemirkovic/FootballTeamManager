@@ -1,5 +1,5 @@
-#include "player.h"
 #include "team.h"
+
 #include <stdexcept>
 #include <algorithm>
 
@@ -7,7 +7,7 @@ Team::Team(const string& teamName, const vector<Player>& squad)
     : teamName{ teamName }, squad{ squad }
 {
     if (teamName.empty())
-        throw runtime_error("Team name missed!");
+        throw runtime_error("Team name is missing!");
 
     // check for duplicate players
     for (size_t i = 0; i < squad.size(); i++)
@@ -22,29 +22,19 @@ Team::Team(const string& teamName, const vector<Player>& squad)
 
 vector<Player> Team::signPlayers(const vector<Player>& players)
 {
-    vector<Player> removed;
-    bool found = true;
+    vector<Player> alreadySigned;
 
-    for (size_t i = 0; i < players.size(); i++)
+    for (const auto& player : players)
     {
-        found = false;
-
-        for (size_t j = 0; j < squad.size(); j++)
-        {
-            if (players.at(i) == squad.at(j))
-            {
-                removed.push_back(players.at(i));
-                found = true;
-                break;
-            }
-        }
-
-        if (!found)
-        {
-            squad.push_back(players.at(i));
+        auto it = std::find(squad.begin(), squad.end(), player);
+        
+        if (it != squad.end()){
+            alreadySigned.push_back(player);
+        } else {
+            squad.push_back(player);
         }
     }
-    return removed;
+    return alreadySigned;
 }
 
 ostream& operator<<(ostream& os, const Team& team)
@@ -63,14 +53,9 @@ ostream& operator<<(ostream& os, const Team& team)
 }
 
 
-#include <stdexcept>
-#include <string>
-
 string Team::lineup() const
 {
-    int defense = 0;
-    int midfield = 0;
-    int striker = 0;
+    int defense = 0, midfield = 0, striker = 0;
 
     for (const auto& player : squad)
     {
