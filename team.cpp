@@ -1,7 +1,8 @@
+#include "player.h"
 #include "team.h"
-
 #include <stdexcept>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -130,4 +131,44 @@ bool Team::sellPlayer(Player& player, Team& toTeam){
 
     return true;
 
+}
+
+string Team::startingLineup() const{
+    if (squad.empty())
+        throw runtime_error("Team has no players!");
+
+    map<Position, vector<Player>> grouped;
+
+    for (const auto& p : squad)
+        grouped[p.getPosition()].push_back(p);
+
+
+    auto sortByPerformance = [](vector<Player>& players){
+
+        sort(players.begin(), players.end(),
+             [](const Player& a, const Player& b) {
+                 return (a.getRating()) > (b.getRating());
+             });
+    };
+
+    for (auto& [pos, players] : grouped)
+        sortByPerformance(players);
+
+
+    string result = "Starting lineup:\n";
+
+    for (const auto& [pos, players] : grouped)
+    {
+        result += "- " + positionToString(pos) + ": ";
+
+        for (size_t i = 0; i < players.size(); i++)
+        {
+            result += players[i].getName();
+            if (i != players.size() - 1)
+                result += ", ";
+        }
+        result += "\n";
+    }
+
+    return result;
 }
