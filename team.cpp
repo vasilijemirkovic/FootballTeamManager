@@ -3,6 +3,9 @@
 #include <stdexcept>
 #include <algorithm>
 
+using namespace std;
+
+
 Team::Team(const string& teamName, const vector<Player>& squad)
     : teamName{ teamName }, squad{ squad }
 {
@@ -26,7 +29,7 @@ vector<Player> Team::signPlayers(const vector<Player>& players)
 
     for (const auto& player : players)
     {
-        auto it = std::find(squad.begin(), squad.end(), player);
+        auto it = find(squad.begin(), squad.end(), player);
         
         if (it != squad.end()){
             alreadySigned.push_back(player);
@@ -94,4 +97,37 @@ vector<Player> Team::releasePlayers(const vector<Position>& positions)
     squad.erase(remove_if(squad.begin(), squad.end(), shouldRemove), squad.end());
 
     return removed;
+}
+
+bool Team::buyPlayer(Player& player, Team& fromTeam){
+
+    auto fromTeamIt = find(fromTeam.squad.begin(), fromTeam.squad.end(), player);
+
+    auto thisTeamIt = find(squad.begin(), squad.end(), player);
+
+    if(thisTeamIt != squad.end() || fromTeamIt == fromTeam.squad.end()){
+        return false;
+    }
+
+    squad.push_back(player);
+    fromTeam.squad.erase(fromTeamIt);
+    
+    return true;
+}
+
+bool Team::sellPlayer(Player& player, Team& toTeam){
+
+    auto toTeamIt = find(toTeam.squad.begin(), toTeam.squad.end(), player);
+
+    auto thisTeamIt = find(squad.begin(), squad.end(), player);
+
+    if(thisTeamIt == squad.end() || toTeamIt != toTeam.squad.end()){
+        return false;
+    }
+
+    toTeam.squad.push_back(player);
+    squad.erase(thisTeamIt);
+
+    return true;
+
 }
