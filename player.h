@@ -21,7 +21,7 @@ private:
 public:
     Player(const string& name, const int& transferFee, const Position& position = Position::Goalkeeper);
 
-    const std::string& getName() const;
+    const string& getName() const;
     int getTransferFee() const;
 
     bool operator==(const Player& otherPlayer) const;
