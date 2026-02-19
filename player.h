@@ -6,10 +6,8 @@
 #include <string>
 #include <ostream>
 
-using namespace std;
-
 enum class Position { Goalkeeper, Defense, Midfield, Striker };
-const vector<string> positionNames{ "Goalkeeper", "Defense", "Midfield", "Striker" };
+const std::vector<std::string> positionNames{ "Goalkeeper", "Defense", "Midfield", "Striker" };
 
 
 struct Stats {
@@ -22,16 +20,16 @@ struct Stats {
 class Player
 {
 private:
-    string name;
+    std::string name;
     int transferFee;
     Position position;
     Stats stats;
 
 public:
-    Player(const string& name, const int& transferFee, const Position& position = Position::Goalkeeper);
+    Player(const std::string& name, const int& transferFee, const Position& position = Position::Goalkeeper);
 
     //getters
-    const string& getName() const;
+    const std::string& getName() const;
     int getTransferFee() const;
     Position getPosition() const;
     const Stats& getStats() const;
@@ -46,7 +44,10 @@ public:
     
     bool operator==(const Player& otherPlayer) const;
 
-    friend ostream& operator<<(ostream& os, const Player& player);
+    friend std::ostream& operator<<(std::ostream& os, const Player& player);
+
 };
+
+std::string positionToString(Position p);
 
 #endif // PLAYER_H
