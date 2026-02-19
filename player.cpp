@@ -21,8 +21,35 @@ int Player::getTransferFee() const {
     return this->transferFee;
 }
 
+Position Player::getPosition() const {
+    return this->position;
+}
 
-bool Player::operator==(const Player& otherPlayer) const{
+const Stats& Player::getStats() const {
+    return this->stats;
+}
+
+void Player::addGoal(){
+    stats.goals++;
+}
+
+void Player::addAssist(){
+    stats.assists++;
+}
+
+void Player::addYellowCard(){
+    stats.yellowCards++;
+}
+
+void Player::addRedCard(){
+    stats.redCards++;
+}
+
+int Player::getRating() const {
+    return stats.goals * 4 + stats.assists * 3 - stats.yellowCards - stats.redCards * 3;
+}
+
+bool Player::operator==(const Player &otherPlayer) const {
     return (name == otherPlayer.name);
 }
 
@@ -30,12 +57,6 @@ ostream& operator<<(ostream& os, const Player& player)
 {
     return os << "[" << player.name << ", "
               << player.transferFee << " Mio Euro, "
-              << positionNames.at(static_cast<int>(player.position)) << "]";
-}
-
-// Bonus points:
-
-Position Player::getPosition() const
-{
-    return this->position;
+              << positionNames.at(static_cast<int>(player.position))
+              << ", Rating: " << player.getRating() << "]";
 }
