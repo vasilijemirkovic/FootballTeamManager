@@ -9,24 +9,31 @@ using namespace std;
 
 int main() {
 
-  const Player stegen{"Stegen", 60, Position::Goalkeeper};
-  const Player cillessen{"Cillessen", 10};
-  const Player umtiti{"Umtiti", 60, Position::Defense};
-  const Player alba{"Alba", 60, Position::Defense};
-  const Player digne{"Digne", 15, Position::Defense};
-  const Player roberto{"Roberto", 55, Position::Defense};
-  const Player paulinho{"Paulinho", 40, Position::Midfield};
-  const Player gomes{"Gomes", 15, Position::Midfield};
-  const Player rakitic{"Rakitic", 50, Position::Midfield};
-  const Player coutinho{"Coutinho", 100, Position::Midfield};
-  const Player messi{"Messi", 180, Position::Striker};
-  const Player suarez{"Suarez", 70, Position::Striker};
-  const Player elhaddadi{"El Haddadi", 12, Position::Striker};
+  Player stegen{"Stegen", 60, Position::Goalkeeper};
+  Player cillessen{"Cillessen", 10};
+  Player umtiti{"Umtiti", 60, Position::Defense};
+  Player alba{"Alba", 60, Position::Defense};
+  Player digne{"Digne", 15, Position::Defense};
+  Player roberto{"Roberto", 55, Position::Defense};
+  Player paulinho{"Paulinho", 40, Position::Midfield};
+  Player gomes{"Gomes", 15, Position::Midfield};
+  Player rakitic{"Rakitic", 50, Position::Midfield};
+  Player coutinho{"Coutinho", 100, Position::Midfield};
+  Player messi{"Messi", 180, Position::Striker};
+  Player suarez{"Suarez", 70, Position::Striker};
+  Player elhaddadi{"El Haddadi", 12, Position::Striker};
 
   cout << "PLAYERS\n";
   cout << messi << '\n';
   cerr << messi << '\n';
   cout << cillessen << '\n';
+  
+  messi.addGoal();
+  messi.addGoal();
+  messi.addAssist();
+  messi.addYellowCard();
+
+  cout << messi << '\n';
 
   try {
     Player s{"", 60};
