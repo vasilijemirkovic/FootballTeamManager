@@ -26,6 +26,14 @@ public:
 
     // Release players by position; returns released players
     vector<Player> releasePlayers(const vector<Position>&);
+
+    // Transfer Market
+    
+    // Buys a player from another team; returns true if successful
+    bool buyPlayer(Player& player, Team& fromTeam);
+
+    // Sells a player to another team; returns true if successful
+    bool sellPlayer(Player& player, Team& toTeam);
 };
 
 #endif // TEAM_H
