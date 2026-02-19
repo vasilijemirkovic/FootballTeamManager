@@ -59,13 +59,17 @@ string Team::lineup() const
 
     for (const auto& player : squad)
     {
-        if (player.getPosition() == Position::Defense) defense++;
-        if (player.getPosition() == Position::Midfield) midfield++;
-        if (player.getPosition() == Position::Striker) striker++;
+        switch (player.getPosition())
+        {
+            case Position::Defense:  ++defense;  break;
+            case Position::Midfield: ++midfield; break;
+            case Position::Striker:  ++striker;  break;
+            default: break;
+        }
     }
 
     if (defense + midfield + striker != 10)
-        throw runtime_error("Error!");
+        throw runtime_error("Invalid lineup: total outfield players must be 10!");
 
     return to_string(defense) + "-" +
            to_string(midfield) + "-" +
