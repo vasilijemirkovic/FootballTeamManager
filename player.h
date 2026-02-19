@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <sstream>
+#include <ostream>
 
 using namespace std;
 
@@ -15,13 +15,18 @@ class Player
 {
 private:
     string name;
-    int transferAmount;
+    int transferFee;
     Position position;
 
 public:
-    Player(const string& name, const int& transferAmount, const Position& position = Position::Goalkeeper);
-    bool operator==(const Player&) const;
-    friend ostream& operator<<(ostream&, const Player&);
+    Player(const string& name, const int& transferFee, const Position& position = Position::Goalkeeper);
+
+    const std::string& getName() const;
+    int getTransferFee() const;
+
+    bool operator==(const Player& otherPlayer) const;
+
+    friend ostream& operator<<(ostream& os, const Player& player);
 
     // Bonus points:
     Position getPosition() const;
