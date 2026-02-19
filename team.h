@@ -2,30 +2,27 @@
 #define TEAM_H
 
 #include "player.h"
-#include <vector>
-#include <string>
-#include <ostream>
 
 class Team
 {
 private:
-    string teamName;
-    vector<Player> squad;
+    std::string teamName;
+    std::vector<Player> squad;
 
 public:
-    Team(const string& teamName, const vector<Player>& squad = {});
+    Team(const std::string& teamName, const std::vector<Player>& squad = {});
 
-    vector<Player> signPlayers(const vector<Player>& squad);
+    std::vector<Player> signPlayers(const std::vector<Player>& squad);
 
-    friend ostream& operator<<(ostream& os, const Team& team);
+    friend std::ostream& operator<<(std::ostream& os, const Team& team);
 
     // Bonus points:
 
     // Returns lineup as string: defense-midfield-striker
-    string lineup() const;
+    std::string lineup() const;
 
     // Release players by position; returns released players
-    vector<Player> releasePlayers(const vector<Position>&);
+    std::vector<Player> releasePlayers(const std::vector<Position>&);
 
     // Transfer Market
     
@@ -34,6 +31,8 @@ public:
 
     // Sells a player to another team; returns true if successful
     bool sellPlayer(Player& player, Team& toTeam);
+
+    std::string startingLineup() const;
 };
 
 #endif // TEAM_H
