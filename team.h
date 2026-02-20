@@ -33,6 +33,12 @@ public:
     bool sellPlayer(Player& player, Team& toTeam);
 
     std::string startingLineup() const;
+
+    const std::vector<Player>& getSquad() const;
+    
+    std::vector<Player>& getSquad();
+    
+    const std::string& getName() const;
 };
 
 #endif // TEAM_H
