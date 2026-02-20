@@ -172,3 +172,15 @@ string Team::startingLineup() const{
 
     return result;
 }
+
+const vector<Player>& Team::getSquad() const {
+    return squad;
+}
+
+vector<Player>& Team::getSquad() {
+    return squad;
+}
+
+const string& Team::getName() const {
+    return teamName;
+}
