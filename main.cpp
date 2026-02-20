@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "player.h"
 #include "team.h"
+#include "match.h"
 
 using namespace std;
 
@@ -126,6 +127,12 @@ int main() {
       std::cout << "Transfer failed!\n";
 
   std::cout << "After transfer:\n" << psg << '\n' << realMadrid << '\n';
+
+  Match elClasico(barcelona, realMadrid);
+
+  elClasico.play();
+
+  cout << elClasico.getScore() << endl;
 
 
   cout << psg.startingLineup() << endl;
