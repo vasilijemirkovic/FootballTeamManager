@@ -71,3 +71,11 @@ string Match::getScore() const
          + to_string(awayGoals) + " "
          + away.getName();    
 }
+
+const int &Match::getHomeGoals() const {
+    return homeGoals;
+}
+
+const int &Match::getAwayGoals() const {
+    return awayGoals;
+}
