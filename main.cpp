@@ -5,6 +5,8 @@
 #include "player.h"
 #include "team.h"
 #include "match.h"
+#include "league.h"
+#include "season.h"
 
 using namespace std;
 
@@ -25,6 +27,24 @@ int main() {
   Player elhaddadi{"El Haddadi", 12, Position::Striker};
   Player ramos{"Ramos", 60, Position::Defense};
   Player modric{"Modric", 50, Position::Midfield};
+
+  Player drogba{"Drogba", 80, Position::Striker};
+  Player terry{"Terry", 60, Position::Defense};
+  Player lampard{"Lampard", 90, Position::Midfield};
+  Player anelka{"Anelka", 40, Position::Striker};
+  Player carvalho{"Carvalho", 30, Position::Defense};
+  Player essien{"Essien", 60, Position::Midfield};
+  Player cech{"Cech", 20};
+  Player cole{"Cole", 70, Position::Midfield};
+
+  Player podolski{"Podolski", 75, Position::Striker};
+  Player lahm{"Lahm", 50, Position::Defense};
+  Player ribery{"Ribery", 85, Position::Midfield};
+  Player mueller{"Müller", 100, Position::Striker};
+  Player schweinsteiger{"Schweinsteiger", 65, Position::Defense};
+  Player neuer{"Neuer", 30};
+  Player bommel{"Bommel", 90, Position::Midfield};
+
 
   cout << "PLAYERS\n";
   cout << messi << '\n';
@@ -184,7 +204,11 @@ int main() {
   cout << "\nBonus 15 points\n";
   vector<Player> result;
 
+  Team chelsea{"Chelsea", {}};
+  Team bayern{"Bayern", {}};
   barcelona.signPlayers({umtiti, alba, digne, gomes, paulinho, roberto, stegen});
+  chelsea.signPlayers({cech, terry, carvalho, cole, lampard, anelka, drogba, essien});
+  bayern.signPlayers({neuer, lahm, bommel, schweinsteiger, mueller, roberto, podolski, ribery});
 
   result = barcelona.releasePlayers({});
   cout << barcelona << '\n';
@@ -215,7 +239,102 @@ int main() {
   for (const auto& s : result)
     cout << s << " ";
   cout << '\n';
+
+
+  vector<Team*> teams = { &barcelona, &realMadrid, &bayern, &chelsea };
   
+  League UCL(teams);
+  
+  //First round
+  Match m1(barcelona, realMadrid);
+  Match m2(chelsea, bayern);
+
+  m1.play();
+  m2.play();
+  UCL.recordMatch(barcelona, realMadrid, m1.getHomeGoals(), m1.getAwayGoals());
+  UCL.recordMatch(chelsea, bayern, m2.getHomeGoals(), m2.getAwayGoals());
+  
+  UCL.sortTable();
+  
+  UCL.printTable();
+
+
+  //Second round
+  Match m3(realMadrid, chelsea);
+  Match m4(bayern, barcelona);
+  m3.play();
+  m4.play();
+
+  UCL.recordMatch(realMadrid, chelsea, m3.getHomeGoals(), m3.getAwayGoals());
+  UCL.recordMatch(bayern, barcelona, m4.getHomeGoals(), m4.getAwayGoals());
+  
+  UCL.sortTable();
+  
+  UCL.printTable();
+
+  //Third round
+  Match m5(realMadrid, bayern);
+  Match m6(barcelona, chelsea);
+  m5.play();
+  m6.play();
+
+  UCL.recordMatch(realMadrid, bayern, m5.getHomeGoals(), m5.getAwayGoals());
+  UCL.recordMatch(barcelona, chelsea, m6.getHomeGoals(), m6.getAwayGoals());
+  
+  UCL.sortTable();
+  
+  UCL.printTable();
+
+  //Fourth round
+  Match m7(realMadrid, barcelona);
+  Match m8(bayern, chelsea);
+  m7.play();
+  m8.play();
+
+  UCL.recordMatch(realMadrid, bayern, m7.getHomeGoals(), m7.getAwayGoals());
+  UCL.recordMatch(barcelona, chelsea, m8.getHomeGoals(), m8.getAwayGoals());
+  
+  UCL.sortTable();
+  
+  UCL.printTable();
+
+  //Fifth round
+  Match m9(chelsea, realMadrid);
+  Match m10(barcelona, bayern);
+  m9.play();
+  m10.play();
+
+  UCL.recordMatch(chelsea, realMadrid, m9.getHomeGoals(), m9.getAwayGoals());
+  UCL.recordMatch(barcelona, bayern, m10.getHomeGoals(), m10.getAwayGoals());
+  
+  UCL.sortTable();
+  
+  UCL.printTable();
+
+  //Sixth round
+  Match m11(bayern, realMadrid);
+  Match m12(chelsea, barcelona);
+  m11.play();
+  m12.play();
+
+  UCL.recordMatch(bayern, realMadrid, m11.getHomeGoals(), m11.getAwayGoals());
+  UCL.recordMatch(chelsea, barcelona, m12.getHomeGoals(), m12.getAwayGoals());
+  
+  UCL.sortTable();
+  
+  UCL.printTable();
+
+
+  cout << endl;
+
+  cout << "CHAMPION OF THE UCL League is: " << UCL.getTable()[0].team->getName() << endl;
+  
+  Season season(teams);
+
+  season.playSeason();
+  season.printTable();
+
+
 
   return 0;
 }
