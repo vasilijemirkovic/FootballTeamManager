@@ -29,6 +29,9 @@ public:
 
     string getScore() const;
 
+    const int& getHomeGoals() const;
+    const int& getAwayGoals() const;
+
 };
 
 #endif //MATCH_H
